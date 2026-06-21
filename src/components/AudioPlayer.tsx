@@ -3,7 +3,7 @@ import { Play, Pause, Volume2, VolumeX, Music, HelpCircle } from 'lucide-react';
 import { motion } from 'motion/react';
 
 // EASILY REPLACEABLE NASHEED/AUDIO URL CONFIGURATION
-const DEFAULT_AUDIO_URL = "/nasheed.mp3"; // Place your nasheed.mp3 inside the 'public' folder
+const DEFAULT_AUDIO_URL = "/bgsong.mp3"; // Place your nasheed.mp3 inside the 'public' folder
 const FALLBACK_AUDIO_URL = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"; // Online fallback if nasheed.mp3 is not uploaded yet
 
 export default function AudioPlayer() {
