@@ -12,32 +12,28 @@ const GALLERY_ITEMS: GalleryItemWithFallback[] = [
   {
     id: '1',
     type: 'image',
-    url: '/imgg3.jpeg',
-    fallbackUrl: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=800',
+    url: './imgg3.jpeg',
     title: 'A Divine Cradle',
     description: 'Sweet baby dreams under the ultimate care of Allah.'
   },
   {
     id: '2',
     type: 'image',
-    url: '/img1.jpeg',
-    fallbackUrl: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=800',
+    url: './img1.jpeg',
     title: 'Heavenly Smile',
     description: 'A miniature reflection of innocence and fitrah.'
   },
   {
     id: '3',
     type: 'video',
-    url: '/img3vid.mp4',
-    fallbackUrl: 'https://assets.mixkit.co/videos/preview/mixkit-baby-holding-mothers-finger-close-up-42211-large.mp4',
+    url: './img3vid.mp4',
     title: 'Pure Connection',
     description: 'A beautiful touch of divine innocence.'
   },
   {
     id: '4',
     type: 'video',
-    url: '/imgg4vid.mp4',
-    fallbackUrl: 'https://assets.mixkit.co/videos/preview/mixkit-baby-feet-close-up-42215-large.mp4',
+    url: './imgg4vid.mp4',
     title: 'Tiny Steps',
     description: 'Little feet stepping with beautiful blessings from Allah.'
   }
