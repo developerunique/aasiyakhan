@@ -1,0 +1,6 @@
+{
+  "name": "Blessing Website for Aasiya Khan",
+  "description": "A beautiful, elegant single-page Islamic-themed blessing website for the baby girl Aasiya Khan, filled with prayers, a countdown, mommy and daddy's dua, a photo gallery, and soft animations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --color-natural-bg: #fdfaf5;
+  --color-natural-brown: #5a4b44;
+  --color-natural-gold: #d4af37;
+  --color-natural-sage: #9caf88;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-natural-bg); /* Cozy luxury warm ivory-beige background */
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  color: var(--color-natural-brown);
+  scroll-behavior: smooth;
+}
+
+/* Beautiful custom elegant minimalist gold-hinted scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-natural-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #e1d3c0;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-natural-gold);
+}
+
