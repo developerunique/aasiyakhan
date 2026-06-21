@@ -3,7 +3,7 @@ import { Play, Pause, Volume2, VolumeX, Music, HelpCircle } from 'lucide-react';
 import { motion } from 'motion/react';
 
 // EASILY REPLACEABLE NASHEED/AUDIO URL CONFIGURATION
-const DEFAULT_AUDIO_URL = "/bgsong.mp3"; // Place your nasheed.mp3 inside the 'public' folder
+const DEFAULT_AUDIO_URL = "/nasheed.mp3"; // Place your nasheed.mp3 inside the 'public' folder
 const FALLBACK_AUDIO_URL = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"; // Online fallback if nasheed.mp3 is not uploaded yet
 
 export default function AudioPlayer() {
@@ -194,18 +194,6 @@ export default function AudioPlayer() {
               />
             </div>
           </div>
-        </div>
-
-        {/* Floating Instruction Bubble describing custom uploads */}
-        <div className="mt-4 flex flex-col gap-3 p-4 rounded-2xl bg-natural-sage/10 border border-natural-sage/15 text-natural-brown/80 text-[11.5px] font-sans">
-          <div className="flex items-start gap-1.5">
-            <HelpCircle className="w-4 h-4 text-natural-gold shrink-0 mt-0.5 mr-1" />
-            <strong className="text-xs text-natural-brown font-bold">How to Upload Your Own Song &amp; Photos easily (اپنی پسند کا آڈیو اور تصاویر لگانے کا آسان طریقہ):</strong>
-          </div>
-          <ul className="list-disc pl-5 space-y-1.5">
-            <li><strong>Play Your Custom Song (نعت):</strong> Simply upload an MP3 file named <code className="bg-white/80 px-1 py-0.5 rounded text-rose-500 font-semibold font-mono">nasheed.mp3</code> inside the <code className="bg-white/80 px-1 py-0.5 rounded font-mono">/public/</code> folder. The web portal will instantly pick it up and play it automatically when guests enter!</li>
-            <li><strong>Show Your Child's Photos (تصویریں):</strong> Upload four images named <code className="bg-white/80 px-1 py-0.5 rounded font-mono text-rose-500 font-semibold">photo1.jpg</code>, <code className="bg-white/80 px-1 py-0.5 rounded font-mono text-rose-500 font-semibold">photo2.jpg</code>, <code className="bg-white/80 px-1 py-0.5 rounded font-mono text-rose-500 font-semibold">photo3.jpg</code>, and <code className="bg-white/80 px-1 py-0.5 rounded font-mono text-rose-500 font-semibold">photo4.jpg</code> into the <code className="bg-white/80 px-1 py-0.5 rounded font-mono">/public/</code> folder. The photo gallery will load them instantly in place of current preview placeholders!</li>
-          </ul>
         </div>
       </div>
     </div>

@@ -22,23 +22,23 @@ Aapka customized spiritual song system by default automatic play hone lagega jab
 
 ---
 
-## 2. 🖼️ Photos (تصاویر) Kaise Badalni Hain:
+## 2. 🖼️ Photos (تصاویر) aur Videos (ویڈیوز) Kaise Badalni Hain:
 
 Gallery ko fully custom banane ke liye aapko code me parameters change karne ki zaroorat nahi padegi. Humne safe local automatic dynamic fallback handler lagaya hai:
 
 ### **Step-by-Step Instruction:**
-1. Apni baby ki 4 beautiful pictures select karein.
-2. Un photos ke names change karke exact ye name rakhein:
+1. Apni baby ki **2 photos** aur **2 videos** select karein.
+2. Un files ke names change karke exact ye rakhein:
    - Pehli photo ka naam: **`photo1.jpg`**
    - Dusri photo ka naam: **`photo2.jpg`**
-   - Teesri photo ka naam: **`photo3.jpg`**
-   - Chauthi photo ka naam: **`photo4.jpg`**
-3. Google AI Studio ke left sidebar mein **`public`** naam ka folder hoga.
-4. In charo photos (**`photo1.jpg`**, **`photo2.jpg`**, **`photo3.jpg`**, **`photo4.jpg`**) ko **`public`** folder ke andar upload / drop kar dein!
-5. **Bas kam khatam!** Gallery automatically aapki photos load kar legi. Agar koi photo upload nahi hui hogi tab tak, toh elegant preview online photo tab tak chalti rahegi automatically bina error ke!
+   - Pehli video ka naam: **`video1.mp4`**
+   - Dusri video ka naam: **`video2.mp4`**
+3. Google AI Studio ke left sidebar mein **`public`** folder par click karein.
+4. In charo files (**`photo1.jpg`**, **`photo2.jpg`**, **`video1.mp4`**, **`video2.mp4`**) ko **`public`** folder ke andar upload / drag-and-drop kar dein!
+5. **Bas kam khatam!** Portal automatic aapki custom photos aur soundless auto-playing videos ko load kar lega. Agar tab tak aap upload nahi karte hain, toh default online preview automatic chalta rehega bina kisi error ke!
 
-- **Photo locations configuration in code:**
-  - File path: `/src/components/PhotoGallery.tsx` (Lines 8-30 ke andar image links defined hain)
+- **Photo/Video locations configuration in code:**
+  - File path: `/src/components/PhotoGallery.tsx` (Line 10-44 ke andar image & video paths defined hain)
 
 ---
 

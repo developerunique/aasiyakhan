@@ -1,10 +1,10 @@
-Hi! Upload your audio and photos in this VERY directory (/public/)!
+Hi! Upload your audio, photos, and videos in this VERY directory (/public/)!
 
 1. Upload your background MP3 song here and rename it to 'nasheed.mp3'.
-2. Upload your baby photos here and rename them to:
+2. Upload baby photos and MP4 videos here and rename them to:
    - 'photo1.jpg'
    - 'photo2.jpg'
-   - 'photo3.jpg'
-   - 'photo4.jpg'
+   - 'video1.mp4'
+   - 'video2.mp4'
 
 You're all set! It will automatically show up and play on the website!

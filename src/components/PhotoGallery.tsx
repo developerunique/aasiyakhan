@@ -4,49 +4,52 @@ import { X, ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 import { GalleryItem } from '../types';
 
 interface GalleryItemWithFallback extends GalleryItem {
+  type: 'image' | 'video';
   fallbackUrl: string;
 }
 
 const GALLERY_ITEMS: GalleryItemWithFallback[] = [
   {
     id: '1',
-    url: '/imgg3.jpeg',
+    type: 'image',
+    url: '/photo1.jpg',
+    fallbackUrl: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=800',
     title: 'A Divine Cradle',
-    description: 'Sweet baby dreams under the ultimate care and protection of Allah.',
-    date: 'Newborn Blessing'
+    description: 'Sweet baby dreams under the ultimate care of Allah.'
   },
   {
     id: '2',
-    url: '/imgg3vid.mp4',
+    type: 'image',
+    url: '/photo2.jpg',
     fallbackUrl: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=800',
     title: 'Heavenly Smile',
-    description: 'A miniature reflection of innocence and the pure fitrah of childhood.',
-    date: 'Little Wonders'
+    description: 'A miniature reflection of innocence and fitrah.'
   },
   {
     id: '3',
-    url: '/img1.jpeg',
-    fallbackUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=800',
-    title: 'Gentle Blossom',
-    description: 'Growing in grace and purity like a soft pink rose in the spring of Imaan.'
-    
+    type: 'video',
+    url: '/video1.mp4',
+    fallbackUrl: 'https://assets.mixkit.co/videos/preview/mixkit-baby-holding-mothers-finger-close-up-42211-large.mp4',
+    title: 'Pure Connection',
+    description: 'A beautiful touch of divine innocence.'
   },
   {
     id: '4',
-    url: '/imgg4vid.mp4',
-    fallbackUrl: 'https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&q=80&w=800',
-    title: 'Radiant Guidance',
-    description: 'May her steps always be illuminated by the beautiful light of Islam.',
+    type: 'video',
+    url: '/video2.mp4',
+    fallbackUrl: 'https://assets.mixkit.co/videos/preview/mixkit-baby-feet-close-up-42215-large.mp4',
+    title: 'Tiny Steps',
+    description: 'Little feet stepping with beautiful blessings from Allah.'
   }
 ];
 
 export default function PhotoGallery() {
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
-  const [imageUrls, setImageUrls] = useState<Record<string, string>>({
-    '1': '/imgg3.jpeg',
-    '2': '/imgg3vid.mp4',
-    '3': '/img1.jpeg',
-    '4': '/imgg4vid.mp4'
+  const [mediaUrls, setMediaUrls] = useState<Record<string, string>>({
+    '1': '/photo1.jpg',
+    '2': '/photo2.jpg',
+    '3': '/video1.mp4',
+    '4': '/video2.mp4'
   });
   const touchStartX = useRef<number | null>(null);
 
@@ -55,9 +58,9 @@ export default function PhotoGallery() {
     document.body.style.overflow = 'hidden'; // block page scrolling
   };
 
-  const handleImageError = (id: string, fallback: string) => {
-    if (imageUrls[id] !== fallback) {
-      setImageUrls((prev) => ({
+  const handleMediaError = (id: string, fallback: string) => {
+    if (mediaUrls[id] !== fallback) {
+      setMediaUrls((prev) => ({
         ...prev,
         [id]: fallback
       }));
@@ -127,29 +130,34 @@ export default function PhotoGallery() {
             className="group relative bg-white rounded-[32px] overflow-hidden shadow-xs border border-natural-sage/15 cursor-pointer transition-all duration-300"
             onClick={() => openLightbox(idx)}
           >
-            {/* Image Wrap */}
+            {/* Image/Video Wrap */}
             <div className="aspect-[4/3] w-full overflow-hidden bg-neutral-100 relative">
-              <img
-                src={imageUrls[item.id]}
-                alt={item.title}
-                loading="lazy"
-                referrerPolicy="no-referrer"
-                onError={() => handleImageError(item.id, item.fallbackUrl)}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+              {item.type === 'video' ? (
+                <video
+                  src={mediaUrls[item.id]}
+                  muted
+                  loop
+                  playsInline
+                  autoPlay
+                  onError={() => handleMediaError(item.id, item.fallbackUrl)}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              ) : (
+                <img
+                  src={mediaUrls[item.id]}
+                  alt={item.title}
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  onError={() => handleMediaError(item.id, item.fallbackUrl)}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              )}
               {/* Soft overlay */}
               <div className="absolute inset-0 bg-neutral-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <div className="p-3 rounded-full bg-white/95 shadow-xs text-natural-gold">
                   <Eye className="w-5 h-5" />
                 </div>
               </div>
-
-              {/* Float category badge */}
-              {item.date && (
-                <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-xs text-[10px] uppercase tracking-wider font-sans font-bold text-natural-brown shadow-xs">
-                  {item.date}
-                </span>
-              )}
             </div>
 
             {/* Title & Desc Text replaced with beautiful flowers/ornaments */}
@@ -199,16 +207,27 @@ export default function PhotoGallery() {
               animate={{ scale: 1 }}
               exit={{ scale: 0.95 }}
               transition={{ duration: 0.3 }}
-              className="relative max-w-3xl w-full max-h-[70vh] flex items-center justify-center"
+              className="relative max-w-3xl w-full max-h-[70vh] flex items-center justify-center p-2"
               onClick={(e) => e.stopPropagation()} // retain lightbox
             >
-              <img
-                src={imageUrls[GALLERY_ITEMS[activeIdx].id]}
-                alt={GALLERY_ITEMS[activeIdx].title}
-                referrerPolicy="no-referrer"
-                onError={() => handleImageError(GALLERY_ITEMS[activeIdx].id, GALLERY_ITEMS[activeIdx].fallbackUrl)}
-                className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl pointer-events-none"
-              />
+              {GALLERY_ITEMS[activeIdx].type === 'video' ? (
+                <video
+                  src={mediaUrls[GALLERY_ITEMS[activeIdx].id]}
+                  controls
+                  playsInline
+                  autoPlay
+                  onError={() => handleMediaError(GALLERY_ITEMS[activeIdx].id, GALLERY_ITEMS[activeIdx].fallbackUrl)}
+                  className="max-w-full max-h-[70vh] rounded-lg shadow-2xl focus:outline-none"
+                />
+              ) : (
+                <img
+                  src={mediaUrls[GALLERY_ITEMS[activeIdx].id]}
+                  alt={GALLERY_ITEMS[activeIdx].title}
+                  referrerPolicy="no-referrer"
+                  onError={() => handleMediaError(GALLERY_ITEMS[activeIdx].id, GALLERY_ITEMS[activeIdx].fallbackUrl)}
+                  className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl pointer-events-none"
+                />
+              )}
             </motion.div>
 
             {/* Info Box bottom - clean flower theme without descriptive text */}
