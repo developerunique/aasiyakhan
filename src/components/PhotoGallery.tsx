@@ -10,15 +10,14 @@ interface GalleryItemWithFallback extends GalleryItem {
 const GALLERY_ITEMS: GalleryItemWithFallback[] = [
   {
     id: '1',
-    url: '/photo1.jpg',
-    fallbackUrl: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=800',
+    url: '/imgg3.jpeg',
     title: 'A Divine Cradle',
     description: 'Sweet baby dreams under the ultimate care and protection of Allah.',
     date: 'Newborn Blessing'
   },
   {
     id: '2',
-    url: '/photo2.jpg',
+    url: '/imgg3vid.mp4',
     fallbackUrl: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=800',
     title: 'Heavenly Smile',
     description: 'A miniature reflection of innocence and the pure fitrah of childhood.',
@@ -26,29 +25,28 @@ const GALLERY_ITEMS: GalleryItemWithFallback[] = [
   },
   {
     id: '3',
-    url: '/photo3.jpg',
+    url: '/img1.jpeg',
     fallbackUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=800',
     title: 'Gentle Blossom',
-    description: 'Growing in grace and purity like a soft pink rose in the spring of Imaan.',
-    date: 'First Milestones'
+    description: 'Growing in grace and purity like a soft pink rose in the spring of Imaan.'
+    
   },
   {
     id: '4',
-    url: '/photo4.jpg',
+    url: '/imgg4vid.mp4',
     fallbackUrl: 'https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&q=80&w=800',
     title: 'Radiant Guidance',
     description: 'May her steps always be illuminated by the beautiful light of Islam.',
-    date: 'Warm Atmosphere'
   }
 ];
 
 export default function PhotoGallery() {
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
   const [imageUrls, setImageUrls] = useState<Record<string, string>>({
-    '1': '/photo1.jpg',
-    '2': '/photo2.jpg',
-    '3': '/photo3.jpg',
-    '4': '/photo4.jpg'
+    '1': '/imgg3.jpeg',
+    '2': '/imgg3vid.mp4',
+    '3': '/img1.jpeg',
+    '4': '/imgg4vid.mp4'
   });
   const touchStartX = useRef<number | null>(null);
 
