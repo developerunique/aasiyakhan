@@ -3,31 +3,39 @@ import { motion, AnimatePresence } from 'motion/react';
 import { X, ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 import { GalleryItem } from '../types';
 
-const GALLERY_ITEMS: GalleryItem[] = [
+interface GalleryItemWithFallback extends GalleryItem {
+  fallbackUrl: string;
+}
+
+const GALLERY_ITEMS: GalleryItemWithFallback[] = [
   {
     id: '1',
-    url: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=800',
+    url: '/photo1.jpg',
+    fallbackUrl: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=800',
     title: 'A Divine Cradle',
     description: 'Sweet baby dreams under the ultimate care and protection of Allah.',
     date: 'Newborn Blessing'
   },
   {
     id: '2',
-    url: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=800',
+    url: '/photo2.jpg',
+    fallbackUrl: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=800',
     title: 'Heavenly Smile',
     description: 'A miniature reflection of innocence and the pure fitrah of childhood.',
     date: 'Little Wonders'
   },
   {
     id: '3',
-    url: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=800',
+    url: '/photo3.jpg',
+    fallbackUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=800',
     title: 'Gentle Blossom',
     description: 'Growing in grace and purity like a soft pink rose in the spring of Imaan.',
     date: 'First Milestones'
   },
   {
     id: '4',
-    url: 'https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&q=80&w=800',
+    url: '/photo4.jpg',
+    fallbackUrl: 'https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&q=80&w=800',
     title: 'Radiant Guidance',
     description: 'May her steps always be illuminated by the beautiful light of Islam.',
     date: 'Warm Atmosphere'
@@ -36,11 +44,26 @@ const GALLERY_ITEMS: GalleryItem[] = [
 
 export default function PhotoGallery() {
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
+  const [imageUrls, setImageUrls] = useState<Record<string, string>>({
+    '1': '/photo1.jpg',
+    '2': '/photo2.jpg',
+    '3': '/photo3.jpg',
+    '4': '/photo4.jpg'
+  });
   const touchStartX = useRef<number | null>(null);
 
   const openLightbox = (idx: number) => {
     setActiveIdx(idx);
     document.body.style.overflow = 'hidden'; // block page scrolling
+  };
+
+  const handleImageError = (id: string, fallback: string) => {
+    if (imageUrls[id] !== fallback) {
+      setImageUrls((prev) => ({
+        ...prev,
+        [id]: fallback
+      }));
+    }
   };
 
   const closeLightbox = () => {
@@ -109,10 +132,11 @@ export default function PhotoGallery() {
             {/* Image Wrap */}
             <div className="aspect-[4/3] w-full overflow-hidden bg-neutral-100 relative">
               <img
-                src={item.url}
+                src={imageUrls[item.id]}
                 alt={item.title}
                 loading="lazy"
                 referrerPolicy="no-referrer"
+                onError={() => handleImageError(item.id, item.fallbackUrl)}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               {/* Soft overlay */}
@@ -130,14 +154,13 @@ export default function PhotoGallery() {
               )}
             </div>
 
-            {/* Title & Desc Text */}
-            <div className="p-5">
-              <h4 className="font-serif font-bold text-natural-brown text-md group-hover:text-natural-gold transition-colors duration-200">
-                {item.title}
-              </h4>
-              <p className="text-[#5a4b44]/75 font-sans text-xs mt-1.5 leading-relaxed line-clamp-2">
-                {item.description}
-              </p>
+            {/* Title & Desc Text replaced with beautiful flowers/ornaments */}
+            <div className="p-4 flex items-center justify-center gap-1.5 text-rose-300">
+              <span className="text-sm">🌸</span>
+              <span className="w-6 h-[1px] bg-natural-gold/20"></span>
+              <span className="text-xs text-natural-gold">✨</span>
+              <span className="w-6 h-[1px] bg-natural-gold/20"></span>
+              <span className="text-sm">🌸</span>
             </div>
           </motion.div>
         ))}
@@ -182,31 +205,27 @@ export default function PhotoGallery() {
               onClick={(e) => e.stopPropagation()} // retain lightbox
             >
               <img
-                src={GALLERY_ITEMS[activeIdx].url}
+                src={imageUrls[GALLERY_ITEMS[activeIdx].id]}
                 alt={GALLERY_ITEMS[activeIdx].title}
                 referrerPolicy="no-referrer"
+                onError={() => handleImageError(GALLERY_ITEMS[activeIdx].id, GALLERY_ITEMS[activeIdx].fallbackUrl)}
                 className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl pointer-events-none"
               />
             </motion.div>
 
-            {/* Info Box bottom */}
+            {/* Info Box bottom - clean flower theme without descriptive text */}
             <motion.div
               initial={{ y: 20 }}
               animate={{ y: 0 }}
               className="text-center text-white mt-6 max-w-xl px-4 pointer-events-none"
               onClick={(e) => e.stopPropagation()}
             >
-              <p className="text-amber-400 text-xs tracking-widest uppercase font-sans font-semibold mb-1">
-                {GALLERY_ITEMS[activeIdx].date}
-              </p>
-              <h4 className="font-serif text-xl font-bold">
-                {GALLERY_ITEMS[activeIdx].title}
-              </h4>
-              <p className="text-neutral-400 text-xs md:text-sm mt-2 leading-relaxed">
-                {GALLERY_ITEMS[activeIdx].description}
-              </p>
-              <div className="text-[10px] text-neutral-500 mt-4 uppercase tracking-[0.15em] font-sans">
-                Swipe left / right or use arrows • {activeIdx + 1} of {GALLERY_ITEMS.length}
+              <div className="flex items-center justify-center gap-2 text-rose-300 text-sm mb-2">
+                <span>🌸</span>
+                <span className="text-[11px] font-sans text-neutral-300 uppercase tracking-widest font-semibold">
+                  Mubarak Blessing • {activeIdx + 1} of {GALLERY_ITEMS.length}
+                </span>
+                <span>🌸</span>
               </div>
             </motion.div>
 

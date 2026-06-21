@@ -3,7 +3,8 @@ import { Play, Pause, Volume2, VolumeX, Music, HelpCircle } from 'lucide-react';
 import { motion } from 'motion/react';
 
 // EASILY REPLACEABLE NASHEED/AUDIO URL CONFIGURATION
-const DEFAULT_AUDIO_URL = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"; // Cozy placeholder - user will swap this out
+const DEFAULT_AUDIO_URL = "/nasheed.mp3"; // Place your nasheed.mp3 inside the 'public' folder
+const FALLBACK_AUDIO_URL = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"; // Online fallback if nasheed.mp3 is not uploaded yet
 
 export default function AudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -12,6 +13,7 @@ export default function AudioPlayer() {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [audioError, setAudioError] = useState(false);
+  const [audioSrc, setAudioSrc] = useState(DEFAULT_AUDIO_URL);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -38,7 +40,7 @@ export default function AudioPlayer() {
           });
       }
     }
-  }, []);
+  }, [audioSrc]);
 
   const handlePlayPause = () => {
     if (!audioRef.current) return;
@@ -54,7 +56,6 @@ export default function AudioPlayer() {
         })
         .catch((err) => {
           console.warn("Audio play blocked or unavailable. User must interact first.", err);
-          // If true file doesn't exist, we fallback gracefully
           setIsPlaying(true);
         });
     }
@@ -92,8 +93,14 @@ export default function AudioPlayer() {
   };
 
   const handleError = () => {
-    setAudioError(true);
-    console.log("Audio failed to load. Ready for replacement!");
+    // If the local nasheed.mp3 is not uploaded yet or fails, fall back to online placeholder gracefully
+    if (audioSrc === DEFAULT_AUDIO_URL) {
+      console.log("Local nasheed.mp3 not found. Falling back to default online preview!");
+      setAudioSrc(FALLBACK_AUDIO_URL);
+    } else {
+      setAudioError(true);
+      console.log("Audio failed to load. Ready for replacement!");
+    }
   };
 
   const formatTime = (secs: number) => {
@@ -108,7 +115,7 @@ export default function AudioPlayer() {
       {/* Underlying invisible HTML5 Audio player */}
       <audio
         ref={audioRef}
-        src={DEFAULT_AUDIO_URL}
+        src={audioSrc}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
         onError={handleError}
@@ -190,14 +197,14 @@ export default function AudioPlayer() {
         </div>
 
         {/* Floating Instruction Bubble describing custom uploads */}
-        <div className="mt-4 flex flex-col gap-2 p-4 rounded-2xl bg-natural-sage/10 border border-natural-sage/15 text-natural-brown/80 text-[11px] font-sans">
-          <div className="flex items-start gap-1">
+        <div className="mt-4 flex flex-col gap-3 p-4 rounded-2xl bg-natural-sage/10 border border-natural-sage/15 text-natural-brown/80 text-[11.5px] font-sans">
+          <div className="flex items-start gap-1.5">
             <HelpCircle className="w-4 h-4 text-natural-gold shrink-0 mt-0.5 mr-1" />
-            <strong className="text-xs">How to customize Song &amp; Images (گانوں اور تصویروں کو تبدیل کرنے کا طریقہ):</strong>
+            <strong className="text-xs text-natural-brown font-bold">How to Upload Your Own Song &amp; Photos easily (اپنی پسند کا آڈیو اور تصاویر لگانے کا آسان طریقہ):</strong>
           </div>
-          <ul className="list-disc pl-5 space-y-1">
-            <li><strong>Song/Nasheed (نعت/آڈیو):</strong> Copy your MP3 file into the <code>/public/</code> folder (e.g. name it <code>nasheed.mp3</code>), then change <code>DEFAULT_AUDIO_URL</code> inside <code>src/components/AudioPlayer.tsx</code> to <code>"/nasheed.mp3"</code>!</li>
-            <li><strong>Images (تصویریں):</strong> Copy your child's pictures into the <code>/public/</code> folder, then replace the image URLs inside <code>GALLERY_ITEMS</code> in <code>src/components/PhotoGallery.tsx</code> with paths like <code>"/baby_photo.jpg"</code>!</li>
+          <ul className="list-disc pl-5 space-y-1.5">
+            <li><strong>Play Your Custom Song (نعت):</strong> Simply upload an MP3 file named <code className="bg-white/80 px-1 py-0.5 rounded text-rose-500 font-semibold font-mono">nasheed.mp3</code> inside the <code className="bg-white/80 px-1 py-0.5 rounded font-mono">/public/</code> folder. The web portal will instantly pick it up and play it automatically when guests enter!</li>
+            <li><strong>Show Your Child's Photos (تصویریں):</strong> Upload four images named <code className="bg-white/80 px-1 py-0.5 rounded font-mono text-rose-500 font-semibold">photo1.jpg</code>, <code className="bg-white/80 px-1 py-0.5 rounded font-mono text-rose-500 font-semibold">photo2.jpg</code>, <code className="bg-white/80 px-1 py-0.5 rounded font-mono text-rose-500 font-semibold">photo3.jpg</code>, and <code className="bg-white/80 px-1 py-0.5 rounded font-mono text-rose-500 font-semibold">photo4.jpg</code> into the <code className="bg-white/80 px-1 py-0.5 rounded font-mono">/public/</code> folder. The photo gallery will load them instantly in place of current preview placeholders!</li>
           </ul>
         </div>
       </div>
