@@ -41,10 +41,10 @@ const GALLERY_ITEMS: GalleryItemWithFallback[] = [
 export default function PhotoGallery() {
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
   const [mediaUrls, setMediaUrls] = useState<Record<string, string>>({
-    '1': '/photo1.jpg',
-    '2': '/photo2.jpg',
-    '3': '/photo3.jpg',
-    '4': '/photo4.jpg'
+    '1': '/imgg3.jpeg',
+    '2': '/img1.jpeg',
+    '3': '/imgg4.jpeg',
+    '4': '/imgg2.jpeg'
   });
   const touchStartX = useRef<number | null>(null);
 
