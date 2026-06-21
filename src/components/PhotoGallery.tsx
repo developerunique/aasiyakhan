@@ -10,28 +10,28 @@ interface GalleryItemWithFallback extends GalleryItem {
 const GALLERY_ITEMS: GalleryItemWithFallback[] = [
   {
     id: '1',
-    url: '/photo1.jpg',
+    url: '/imgg3.jpeg',
     fallbackUrl: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=800',
     title: 'Photo 1',
     description: ''
   },
   {
     id: '2',
-    url: '/photo2.jpg',
+    url: '/img1.jpeg',
     fallbackUrl: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=800',
     title: 'Photo 2',
     description: ''
   },
   {
     id: '3',
-    url: '/photo3.jpg',
+    url: '/imgg4.jpeg',
     fallbackUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=800',
     title: 'Photo 3',
     description: ''
   },
   {
     id: '4',
-    url: '/photo4.jpg',
+    url: '/imgg2.jpeg',
     fallbackUrl: 'https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&q=80&w=800',
     title: 'Photo 4',
     description: ''
