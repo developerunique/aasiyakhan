@@ -4,38 +4,37 @@ import { X, ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 import { GalleryItem } from '../types';
 
 interface GalleryItemWithFallback extends GalleryItem {
-  type: 'image' | 'video';
   fallbackUrl: string;
 }
 
 const GALLERY_ITEMS: GalleryItemWithFallback[] = [
   {
     id: '1',
-    type: 'image',
-    url: './imgg3.jpeg',
-    title: 'A Divine Cradle',
-    description: 'Sweet baby dreams under the ultimate care of Allah.'
+    url: '/photo1.jpg',
+    fallbackUrl: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=800',
+    title: 'Photo 1',
+    description: ''
   },
   {
     id: '2',
-    type: 'image',
-    url: './img1.jpeg',
-    title: 'Heavenly Smile',
-    description: 'A miniature reflection of innocence and fitrah.'
+    url: '/photo2.jpg',
+    fallbackUrl: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=800',
+    title: 'Photo 2',
+    description: ''
   },
   {
     id: '3',
-    type: 'video',
-    url: './img3vid.mp4',
-    title: 'Pure Connection',
-    description: 'A beautiful touch of divine innocence.'
+    url: '/photo3.jpg',
+    fallbackUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=800',
+    title: 'Photo 3',
+    description: ''
   },
   {
     id: '4',
-    type: 'video',
-    url: './imgg4vid.mp4',
-    title: 'Tiny Steps',
-    description: 'Little feet stepping with beautiful blessings from Allah.'
+    url: '/photo4.jpg',
+    fallbackUrl: 'https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&q=80&w=800',
+    title: 'Photo 4',
+    description: ''
   }
 ];
 
@@ -44,8 +43,8 @@ export default function PhotoGallery() {
   const [mediaUrls, setMediaUrls] = useState<Record<string, string>>({
     '1': '/photo1.jpg',
     '2': '/photo2.jpg',
-    '3': '/video1.mp4',
-    '4': '/video2.mp4'
+    '3': '/photo3.jpg',
+    '4': '/photo4.jpg'
   });
   const touchStartX = useRef<number | null>(null);
 
@@ -126,28 +125,16 @@ export default function PhotoGallery() {
             className="group relative bg-white rounded-[32px] overflow-hidden shadow-xs border border-natural-sage/15 cursor-pointer transition-all duration-300"
             onClick={() => openLightbox(idx)}
           >
-            {/* Image/Video Wrap */}
+            {/* Image Wrap */}
             <div className="aspect-[4/3] w-full overflow-hidden bg-neutral-100 relative">
-              {item.type === 'video' ? (
-                <video
-                  src={mediaUrls[item.id]}
-                  muted
-                  loop
-                  playsInline
-                  autoPlay
-                  onError={() => handleMediaError(item.id, item.fallbackUrl)}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              ) : (
-                <img
-                  src={mediaUrls[item.id]}
-                  alt={item.title}
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                  onError={() => handleMediaError(item.id, item.fallbackUrl)}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              )}
+              <img
+                src={mediaUrls[item.id]}
+                alt={item.title}
+                loading="lazy"
+                referrerPolicy="no-referrer"
+                onError={() => handleMediaError(item.id, item.fallbackUrl)}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
               {/* Soft overlay */}
               <div className="absolute inset-0 bg-neutral-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <div className="p-3 rounded-full bg-white/95 shadow-xs text-natural-gold">
@@ -206,24 +193,13 @@ export default function PhotoGallery() {
               className="relative max-w-3xl w-full max-h-[70vh] flex items-center justify-center p-2"
               onClick={(e) => e.stopPropagation()} // retain lightbox
             >
-              {GALLERY_ITEMS[activeIdx].type === 'video' ? (
-                <video
-                  src={mediaUrls[GALLERY_ITEMS[activeIdx].id]}
-                  controls
-                  playsInline
-                  autoPlay
-                  onError={() => handleMediaError(GALLERY_ITEMS[activeIdx].id, GALLERY_ITEMS[activeIdx].fallbackUrl)}
-                  className="max-w-full max-h-[70vh] rounded-lg shadow-2xl focus:outline-none"
-                />
-              ) : (
-                <img
-                  src={mediaUrls[GALLERY_ITEMS[activeIdx].id]}
-                  alt={GALLERY_ITEMS[activeIdx].title}
-                  referrerPolicy="no-referrer"
-                  onError={() => handleMediaError(GALLERY_ITEMS[activeIdx].id, GALLERY_ITEMS[activeIdx].fallbackUrl)}
-                  className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl pointer-events-none"
-                />
-              )}
+              <img
+                src={mediaUrls[GALLERY_ITEMS[activeIdx].id]}
+                alt={GALLERY_ITEMS[activeIdx].title}
+                referrerPolicy="no-referrer"
+                onError={() => handleMediaError(GALLERY_ITEMS[activeIdx].id, GALLERY_ITEMS[activeIdx].fallbackUrl)}
+                className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl pointer-events-none"
+              />
             </motion.div>
 
             {/* Info Box bottom - clean flower theme without descriptive text */}

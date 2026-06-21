@@ -22,23 +22,23 @@ Aapka customized spiritual song system by default automatic play hone lagega jab
 
 ---
 
-## 2. 🖼️ Photos (تصاویر) aur Videos (ویڈیوز) Kaise Badalni Hain:
+## 2. 🖼️ Photos (تصاویر) Kaise Badalni Hain:
 
 Gallery ko fully custom banane ke liye aapko code me parameters change karne ki zaroorat nahi padegi. Humne safe local automatic dynamic fallback handler lagaya hai:
 
 ### **Step-by-Step Instruction:**
-1. Apni baby ki **2 photos** aur **2 videos** select karein.
+1. Apni baby ki **4 beautiful photos** select karein.
 2. Un files ke names change karke exact ye rakhein:
    - Pehli photo ka naam: **`photo1.jpg`**
    - Dusri photo ka naam: **`photo2.jpg`**
-   - Pehli video ka naam: **`video1.mp4`**
-   - Dusri video ka naam: **`video2.mp4`**
+   - Teesri photo ka naam: **`photo3.jpg`**
+   - Chauthi photo ka naam: **`photo4.jpg`**
 3. Google AI Studio ke left sidebar mein **`public`** folder par click karein.
-4. In charo files (**`photo1.jpg`**, **`photo2.jpg`**, **`video1.mp4`**, **`video2.mp4`**) ko **`public`** folder ke andar upload / drag-and-drop kar dein!
-5. **Bas kam khatam!** Portal automatic aapki custom photos aur soundless auto-playing videos ko load kar lega. Agar tab tak aap upload nahi karte hain, toh default online preview automatic chalta rehega bina kisi error ke!
+4. In charo files (**`photo1.jpg`**, **`photo2.jpg`**, **`photo3.jpg`**, **`photo4.jpg`**) ko **`public`** folder ke andar upload / drag-and-drop kar dein!
+5. **Bas kam khatam!** Portal automatic aapki custom photos ko load kar lega. Agar tab tak aap upload nahi karte hain, toh default online preview automatic chalta rehega bina kisi error ke!
 
-- **Photo/Video locations configuration in code:**
-  - File path: `/src/components/PhotoGallery.tsx` (Line 10-44 ke andar image & video paths defined hain)
+- **Photo locations configuration in code:**
+  - File path: `/src/components/PhotoGallery.tsx` (Lines 10-40 ke andar image paths defined hain)
 
 ---
 
